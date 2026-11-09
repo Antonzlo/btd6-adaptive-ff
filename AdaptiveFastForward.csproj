@@ -17,6 +17,7 @@
     <Reference Include="UnityEngine.CoreModule"><HintPath>$(Il2CppAssemblies)/UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine.UI"><HintPath>$(Il2CppAssemblies)/UnityEngine.UI.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="Unity.TextMeshPro"><HintPath>$(Il2CppAssemblies)/Unity.TextMeshPro.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Il2CppNinjaKiwi.Localization"><HintPath>$(Il2CppAssemblies)/Il2CppNinjaKiwi.Localization.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="Btd6ModHelper"><HintPath>$(BloonsTD6)/Mods/Btd6ModHelper.dll</HintPath><Private>false</Private></Reference>
   </ItemGroup>
   <ItemGroup>
