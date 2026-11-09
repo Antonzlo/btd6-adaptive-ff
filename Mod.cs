@@ -5,6 +5,7 @@ using BTD_Mod_Helper;
 using BTD_Mod_Helper.Api;
 using BTD_Mod_Helper.Api.Components;
 using BTD_Mod_Helper.Api.Helpers;
+using BTD_Mod_Helper.Api.ModOptions;
 using HarmonyLib;
 using MelonLoader;
 using Il2CppAssets.Scripts.Simulation;
@@ -27,7 +28,18 @@ namespace AdaptiveFastForward;
 public class Mod : BloonsTD6Mod
 {
     const double BudgetMs = 10; // sim time per frame we aim for
-    const double MinShare = 0.5; // never slower than half the chosen speed
+    public static readonly ModSettingDouble MinSpeed = new(3)
+    {
+        displayName = "Minimum speed",
+        description = "Never slows down below this speed (x). A chosen speed below it is left as is.",
+        min = 1, max = 100, slider = true, stepSize = 0.5f
+    };
+    public static readonly ModSettingDouble MaxSpeed = new(100)
+    {
+        displayName = "Maximum speed",
+        description = "Never runs faster than this speed (x), whatever fast forward speed is chosen.",
+        min = 1, max = 100, slider = true, stepSize = 0.5f
+    };
     static readonly double ToMs = 1000.0 / Stopwatch.Frequency;
 
     // Coop Speed Sync reads LocalFactor and writes PeerFactor by reflection (keep the names): in co-op everyone runs
@@ -63,10 +75,12 @@ public class Mod : BloonsTD6Mod
             LocalFactor = 1;
             return;
         }
+        double ceiling = Math.Min(chosen, MaxSpeed);
+        double floor = Math.Min(ceiling, MinSpeed);
         double current = chosen * LocalFactor;
-        if (avgSimMs > BudgetMs) current = Math.Max(Math.Max(1, chosen * MinShare), current * 0.9);
-        else if (avgSimMs < BudgetMs * 0.7) current = Math.Min(chosen, current * 1.05);
-        LocalFactor = current / chosen;
+        if (avgSimMs > BudgetMs) current *= 0.9;
+        else if (avgSimMs < BudgetMs * 0.7) current *= 1.05;
+        LocalFactor = Math.Clamp(current, floor, ceiling) / chosen;
     }
 
     // Mod Helper sets Time.timeScale from the chosen speed in its own TimeManager.Update postfix; run after it
