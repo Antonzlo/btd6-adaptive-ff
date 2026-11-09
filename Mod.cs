@@ -99,7 +99,7 @@ public class Mod : BloonsTD6Mod
     [HarmonyPatch(typeof(RoundDisplay), nameof(RoundDisplay.OnUpdate))]
     static class SpeedLabel
     {
-        const float Gap = 30;
+        const float Gap = 60;
         static ModHelperText label;
         static ModHelperImage icon;
         static string shown;
@@ -123,7 +123,8 @@ public class Mod : BloonsTD6Mod
             // left edge of the round text's box, in its own local space (textBounds put the label on top of the digits)
             var box = round.rectTransform.rect;
             // the text is right aligned and grows left past its box ("40/80"), so measure from the right edge
-            float right = Mathf.Min(box.xMin, box.xMax - round.preferredWidth) - Gap;
+            // textBounds (the drawn glyphs) can only move it further left, never onto the digits
+            float right = Mathf.Min(Mathf.Min(box.xMin, box.xMax - round.preferredWidth), round.textBounds.min.x) - Gap;
             label.transform.localPosition = new Vector3(right, box.center.y, 0);
             icon.transform.localPosition = new Vector3(right - label.Text.preferredWidth - Gap / 2, box.center.y, 0);
         }
