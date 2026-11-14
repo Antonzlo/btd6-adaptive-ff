@@ -1,0 +1,7 @@
+{
+  "AdaptiveFastForward-AdaptiveFastForward DisplayDescription": "Снижает скорость перемотки, пока симуляция не успевает, и потом возвращает её обратно: тяжёлые моменты идут медленнее, а не рывками. Каждый тик считается как раньше, баланс не меняется. Минимальная и максимальная скорость задаются в настройках мода. Текущая скорость показана слева от счётчика раундов.",
+  "AdaptiveFastForward-MinSpeed Setting Name": "Минимальная скорость",
+  "AdaptiveFastForward-MinSpeed Setting Description": "Скорость (x), ниже которой мод не замедляет. Если выбранная скорость ниже, она остаётся как есть.",
+  "AdaptiveFastForward-MaxSpeed Setting Name": "Максимальная скорость",
+  "AdaptiveFastForward-MaxSpeed Setting Description": "Скорость (x), выше которой игра не идёт, какая бы скорость перемотки ни была выбрана."
+}

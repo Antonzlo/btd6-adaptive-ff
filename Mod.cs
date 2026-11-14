@@ -99,7 +99,7 @@ public class Mod : BloonsTD6Mod
     [HarmonyPatch(typeof(RoundDisplay), nameof(RoundDisplay.OnUpdate))]
     static class SpeedLabel
     {
-        const float Gap = 60;
+        const float Gap = 150;  // units of the round text (font size 100) between its digits and the speed
         static ModHelperText label;
         static ModHelperImage icon;
         static string shown;

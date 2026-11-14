@@ -23,5 +23,7 @@
   <ItemGroup>
     <!-- drop a square Icon.png next to the project: Mod Helper shows it on the Mods screen -->
     <EmbeddedResource Include="Icon.png" Condition="Exists('Icon.png')" />
+    <!-- Mod Helper loads Localization/<Language>.json for the game's language -->
+    <EmbeddedResource Include="Localization/*.json" />
   </ItemGroup>
 </Project>
